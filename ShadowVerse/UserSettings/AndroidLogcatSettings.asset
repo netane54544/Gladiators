@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CT510V8WL",
         "name": "com.DotNet.ShadowVerse",
-        "processId": 5338,
+        "processId": 31230,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -846,6 +846,36 @@
             "deviceId": "R5CT510V8WL",
             "name": "com.DotNet.ShadowVerse",
             "processId": 5338,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 27442,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 28813,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 29409,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 30450,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 31230,
             "exited": false
         }
     ],

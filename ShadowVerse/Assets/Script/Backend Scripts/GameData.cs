@@ -32,6 +32,7 @@ public class GameData : ScriptableObject
     public List<BuildingData> data;
     public CurrencyData currencyData;
     public bool canSaveLocal = true;
+    public bool canBuild = true;
     [SerializeField]
     private BuildingType townHall;
     [SerializeField]

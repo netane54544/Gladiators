@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,10 +78,21 @@ public class LoadGameDataLogin : MonoBehaviour
                 gameData.currencyData.gold = PlayerPrefs.GetInt("gold");
             }
 
+            SceneManager.sceneLoaded += OnTownLoad;
+
             StartCoroutine(GlobalUtil.Instance.LoadSceneAsync(1));
             //Done
             progressBar.fillAmount = 1f;
         }
     }
-    
+
+    private void OnTownLoad(Scene scene, LoadSceneMode load)
+    {
+        foreach (var item in gameData.data)
+        {
+            Instantiate(gameData.GetConfig(item).prefab, item.position, item.rotation);
+        }
+
+        SceneManager.sceneLoaded -= OnTownLoad;
+    }
 }

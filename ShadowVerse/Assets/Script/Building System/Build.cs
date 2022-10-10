@@ -9,7 +9,13 @@ public class Build : MonoBehaviour
     [SerializeField]
     private GameData gData;
 
-    void Update()
+    private void Start()
+    {
+        if (!gData.canBuild)
+            this.enabled = false;
+    }
+
+    private void Update()
     {
 #if UNITY_EDITOR
         if (Input.GetMouseButton(0))
@@ -19,20 +25,18 @@ public class Build : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 gData.data.Add(new() { building = Building.TownHall, position = hit.point });
-                int index = gData.data.Count - 1;
-                gData.data[index].id = index;
+                gData.data[^1].id = gData.data.Count - 1;
 
-                tB = CanBuild(gData.GetConfig(gData.data[index]), hit.point);
+                tB = CanBuild(gData.GetConfig(gData.data[^1]), hit.point);
 
                 if (tB)
                 {
-                    GameObject ob = Instantiate(gData.GetConfig(gData.data[index]).prefab.gameObject, hit.point, Quaternion.identity);
-                    ob.name = index.ToString();
-                    gData.data[index].rotation = ob.transform.rotation;
-                    gData.data[index].scale = ob.transform.localScale;
+                    GameObject ob = Instantiate(gData.GetConfig(gData.data[^1]).prefab.gameObject, hit.point, Quaternion.identity);
+                    gData.data[^1].rotation = ob.transform.rotation;
+                    gData.data[^1].scale = ob.transform.localScale;
 
-                    var json = JsonUtility.ToJson(gData.data[index]);
-                    Debug.Log(json);
+                    var json = JsonUtility.ToJson(gData.data[^1]);
+                    //Debug.Log(json);
                 }
             }
         }
@@ -51,22 +55,20 @@ public class Build : MonoBehaviour
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
                     gData.data.Add(new() { building = Building.TownHall, position = hit.point });
-                    int index = gData.data.Count - 1;
-                    gData.data[index].id = index;
+                    gData.data[^1].id = gData.data.Count - 1;
 
-                    tB = CanBuild(gData.GetConfig(gData.data[index]), hit.point);
+                    tB = CanBuild(gData.GetConfig(gData.data[^1]), hit.point);
 
                     if (tB)
                     {
-                        GameObject ob = Instantiate(gData.GetConfig(gData.data[index]).prefab.gameObject, hit.point, Quaternion.identity);
-                        ob.name = index.ToString();
-                        gData.data[index].rotation = ob.transform.rotation;
-                        gData.data[index].scale = ob.transform.localScale;
+                        GameObject ob = Instantiate(gData.GetConfig(gData.data[^1]).prefab.gameObject, hit.point, Quaternion.identity);
+                        gData.data[^1].rotation = ob.transform.rotation;
+                        gData.data[^1].scale = ob.transform.localScale;
 
-                        var json = JsonUtility.ToJson(gData.data[index]);
+                        var json = JsonUtility.ToJson(gData.data[^1]);
                         //Debug.Log(json);
 
-                        SaveData(json, index);
+                        SaveData(json, gData.data.Count - 1);
                     }
                 }
             }
