@@ -1,0 +1,108 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.Services.CloudSave;
+using UnityEngine;
+
+public class Build : MonoBehaviour
+{
+    [SerializeField]
+    private GameData gData;
+
+    void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+            bool tB = false;
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                gData.data.Add(new() { building = Building.TownHall, position = hit.point });
+                int index = gData.data.Count - 1;
+                gData.data[index].id = index;
+
+                tB = CanBuild(gData.GetConfig(gData.data[index]), hit.point);
+
+                if (tB)
+                {
+                    GameObject ob = Instantiate(gData.GetConfig(gData.data[index]).prefab.gameObject, hit.point, Quaternion.identity);
+                    ob.name = index.ToString();
+                    gData.data[index].rotation = ob.transform.rotation;
+                    gData.data[index].scale = ob.transform.localScale;
+
+                    var json = JsonUtility.ToJson(gData.data[index]);
+                    Debug.Log(json);
+                }
+            }
+        }
+
+#endif
+
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if(touch.phase == TouchPhase.Began && touch.phase != TouchPhase.Moved)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(touch.position.x, touch.position.y, 0));
+
+                bool tB = false;
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    gData.data.Add(new() { building = Building.TownHall, position = hit.point });
+                    int index = gData.data.Count - 1;
+                    gData.data[index].id = index;
+
+                    tB = CanBuild(gData.GetConfig(gData.data[index]), hit.point);
+
+                    if (tB)
+                    {
+                        GameObject ob = Instantiate(gData.GetConfig(gData.data[index]).prefab.gameObject, hit.point, Quaternion.identity);
+                        ob.name = index.ToString();
+                        gData.data[index].rotation = ob.transform.rotation;
+                        gData.data[index].scale = ob.transform.localScale;
+
+                        var json = JsonUtility.ToJson(gData.data[index]);
+                        //Debug.Log(json);
+
+                        SaveData(json, index);
+                    }
+                }
+            }
+        }
+    }
+
+    internal async void SaveData(string json, int id)
+    {
+        var toSave = new Dictionary<string, object>() { { id.ToString(), json } };
+        Task task;
+        await (task = CloudSaveService.Instance.Data.ForceSaveAsync(toSave));
+
+        if (task.IsCompletedSuccessfully)
+        {
+            
+
+            Debug.Log("Saved");
+        }
+        else
+        {
+            Debug.Log("Error in saving");
+        }
+    }
+
+    internal bool CanBuild(BuildingType buildingType, Vector3 position)
+    {
+        Collider[] colliders = Physics.OverlapBox(position, buildingType.prefab.GetComponent<BoxCollider>().size, Quaternion.identity, gData.GetLayerMaskBuilding());
+        //Gizmos.DrawCube(position, buildingType.prefab.GetComponent<BoxCollider>().size);
+
+        if (colliders.Length > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+}
