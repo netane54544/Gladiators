@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.Services.CloudSave;
 using UnityEngine;
 
 public class Build : MonoBehaviour
@@ -68,30 +66,14 @@ public class Build : MonoBehaviour
                         var json = JsonUtility.ToJson(gData.data[^1]);
                         //Debug.Log(json);
 
-                        SaveData(json, gData.data.Count - 1);
+                        GlobalUtil.Instance.SaveDataCloudAsync(json, gData.data.Count - 1);
                     }
                 }
             }
         }
     }
 
-    internal async void SaveData(string json, int id)
-    {
-        var toSave = new Dictionary<string, object>() { { id.ToString(), json } };
-        Task task;
-        await (task = CloudSaveService.Instance.Data.ForceSaveAsync(toSave));
-
-        if (task.IsCompletedSuccessfully)
-        {
-            
-
-            Debug.Log("Saved");
-        }
-        else
-        {
-            Debug.Log("Error in saving");
-        }
-    }
+    
 
     internal bool CanBuild(BuildingType buildingType, Vector3 position)
     {

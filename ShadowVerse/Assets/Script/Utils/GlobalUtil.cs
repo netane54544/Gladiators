@@ -1,13 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Unity.Services.CloudSave;
 using Unity.Services.Economy;
 using Unity.Services.Economy.Model;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class GlobalUtil : Singleton<GlobalUtil>
 {
+
+    internal async void SaveDataCloudAsync(string json, int id)
+    {
+        var toSave = new Dictionary<string, object>() { { id.ToString(), json } };
+        Task task;
+        await (task = CloudSaveService.Instance.Data.ForceSaveAsync(toSave));
+
+        if (task.IsCompletedSuccessfully)
+        {
+
+
+            Debug.Log("Saved");
+        }
+        else
+        {
+            Debug.Log("Error in saving");
+        }
+    }
+
+    internal async void SaveDataCloudAsync(string json, int id, System.Action success)
+    {
+        var toSave = new Dictionary<string, object>() { { id.ToString(), json } };
+        Task task;
+        await (task = CloudSaveService.Instance.Data.ForceSaveAsync(toSave));
+
+        if (task.IsCompletedSuccessfully)
+        {
+            success.Invoke();
+            Debug.Log("Saved");
+        }
+        else
+        {
+            Debug.Log("Error in saving");
+        }
+    }
+
+    internal async void SaveDataCloudAsync(string json, int id, System.Action fail, System.Action success = null)
+    {
+        var toSave = new Dictionary<string, object>() { { id.ToString(), json } };
+        Task task;
+        await (task = CloudSaveService.Instance.Data.ForceSaveAsync(toSave));
+
+        if (task.IsCompletedSuccessfully)
+        {
+
+            if(success != null)
+                success.Invoke();
+
+            Debug.Log("Saved");
+        }
+        else
+        {
+            fail.Invoke();
+            Debug.Log("Error in saving");
+        }
+    }
+
     internal void UpdateBalanceLocal(CurrencyData data, GameData gameData)
     {
         gameData.currencyData.food = data.food;

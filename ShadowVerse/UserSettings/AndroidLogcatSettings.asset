@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CT510V8WL",
         "name": "com.DotNet.ShadowVerse",
-        "processId": 31230,
+        "processId": 30759,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -876,6 +876,252 @@
             "deviceId": "R5CT510V8WL",
             "name": "com.DotNet.ShadowVerse",
             "processId": 31230,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 5841,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 25715,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 27831,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 1248,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 2218,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 3953,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 5343,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 7540,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 8315,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 10553,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 11183,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 12709,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 19317,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 20688,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 21611,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 22750,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 16411,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 18893,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 21078,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 22008,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 28824,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 29941,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 32613,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 3461,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 4979,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 16076,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 17702,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 18816,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 19789,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 20585,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 21735,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 22179,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 30005,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT510V8WL",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 30759,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 27966,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 28757,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 29585,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 30821,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 31676,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 8340,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CT51Q73HN",
+            "name": "com.DotNet.ShadowVerse",
+            "processId": 9590,
             "exited": false
         }
     ],

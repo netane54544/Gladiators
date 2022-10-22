@@ -25,6 +25,7 @@ public class GetNetworkData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         progressBar.fillAmount = 0.25f;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep; //Stops the game screen from turing off
 
         SetGoogle();
     }
