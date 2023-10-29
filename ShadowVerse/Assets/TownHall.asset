@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc791c4458eff54190e6b850d8ed40f, type: 3}
+  m_Name: TownHall
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4466420356993889357, guid: f155d1f33cfc8e34aa41b9c59664d8a0, type: 3}
+  constractionPrefab: {fileID: 4466420356993889357, guid: 61fb5da3da851194d9afc5c94253e5d7, type: 3}

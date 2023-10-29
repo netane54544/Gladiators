@@ -19,25 +19,78 @@ public class LoadGameDataLogin : MonoBehaviour
 
     private async void Start()
     {
+        //Do the local logic first
+        ZPlayerPrefs.useSecure = true;
+        ZPlayerPrefs.Initialize("0188ulsa", "#has$1223mdddsw!sd,raeewsd#");
+
+        gameData.playersIcons = Resources.LoadAll<Texture2D>("CharIcons");
+        gameData.playersIcons.OrderBy(x => Convert.ToInt32(x.name));
+
         Task<Dictionary<string, string>> task;
         await UnityServices.InitializeAsync();
         await AuthenticationService.Instance.SignInWithGooglePlayGamesAsync(GetNetworkData.authCode);
         await (task = CloudSaveService.Instance.Data.LoadAllAsync());
 
+        //PlayersInventoryItem createdInventoryItem = await EconomyService.Instance.PlayerInventory.AddInventoryItemAsync("P_FIRST");
+        //Debug.Log("Item date: " + createdInventoryItem.Created);
+
+        List<PlayersInventoryItem> inventoryList = await GlobalUtil.Instance.GetItemsAsync();
+        List<PlayersInventoryItem> playersList = inventoryList.Where(x => x.InventoryItemId.StartsWith("P")).ToList();
+
+        //Loads the players in the inventory first
+        //Note: add local save
+        if (playersList.Count > 0)
+        {
+            gameData.playerInventoryData = new();
+
+            foreach (var item in playersList)
+            {
+                var itemDef = await item.GetItemDefinitionAsync();
+                var data = itemDef.CustomData;
+
+                PlayerData tempData = new()
+                {
+                    name = data["name"].ToString(),
+                    hp = Convert.ToInt32(data["hp"]),
+                    attack = Convert.ToInt32(data["attack"]),
+                    level = Convert.ToInt32(data["level"]),
+                    image = gameData.playersIcons[Convert.ToInt32(data["image"])]
+                };
+
+                //Debug.Log("Name: " + tempData.name + " Image: " + tempData.image);
+
+                gameData.playerInventoryData.Add(tempData);
+            }
+        }
+        else
+        {
+            gameData.playerInventoryData = new();
+        }
+
         if (task.IsCompletedSuccessfully)
         {
             Dictionary<string, string> valuesOfTask = task.Result;
+
+            var storeData = valuesOfTask.ToList().Where(pair => pair.Key == "-1").FirstOrDefault();
+
+            if (!storeData.Equals(default(KeyValuePair<string, string>)))
+            {
+                valuesOfTask.Remove("-1");
+                gameData.capacityConstruction = JsonUtility.FromJson<Amount>(storeData.Value);
+                //Debug.Log("Loaded capacity");
+            }
+
             foreach (var item in GlobalUtil.Instance.GetData(valuesOfTask))
             {
                 gameData.data.Add(item);
-                Debug.Log("ID: " + item.id + ", Position: " + item.position);
+                //Debug.Log("ID: " + item.id + ", Position: " + item.position);
             }
 
-            Debug.Log(gameData.data.Count);
+            //Debug.Log(gameData.data.Count);
             progressBar.fillAmount = 0.75f;
 
             //If we have the local data it's faster than getting it online
-            if (PlayerPrefs.GetInt("local") != 1 || gameData.canSaveLocal == false)
+            if (ZPlayerPrefs.GetInt("local") != 1 || gameData.canSaveLocal == false)
             {
                 Debug.Log("Not Local");
                 await foreach (PlayerBalance balance in GlobalUtil.Instance.GetBalanceAsync())
@@ -63,19 +116,19 @@ public class LoadGameDataLogin : MonoBehaviour
                 }
 
                 GlobalUtil.Instance.UpdateBalanceLocal(gameData.currencyData, gameData);
-                PlayerPrefs.SetInt("local", 1);
-                PlayerPrefs.Save();
+                ZPlayerPrefs.SetInt("local", 1);
+                ZPlayerPrefs.Save();
             }
             else
             {
                 Debug.Log("Local");
 
                 //Load the local data
-                gameData.currencyData.food = PlayerPrefs.GetInt("food");
-                gameData.currencyData.wood = PlayerPrefs.GetInt("wood");
-                gameData.currencyData.stone = PlayerPrefs.GetInt("stone");
-                gameData.currencyData.iron = PlayerPrefs.GetInt("iron");
-                gameData.currencyData.gold = PlayerPrefs.GetInt("gold");
+                gameData.currencyData.food = ZPlayerPrefs.GetInt("food");
+                gameData.currencyData.wood = ZPlayerPrefs.GetInt("wood");
+                gameData.currencyData.stone = ZPlayerPrefs.GetInt("stone");
+                gameData.currencyData.iron = ZPlayerPrefs.GetInt("iron");
+                gameData.currencyData.gold = ZPlayerPrefs.GetInt("gold");
             }
 
             SceneManager.sceneLoaded += OnTownLoad;

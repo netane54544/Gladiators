@@ -28,16 +28,16 @@ public class TownNetworkData : MonoBehaviour
     [SerializeField]
     private GameData gameData;
 
-    private async void Awake()
+    private void Awake()
     {
         userText.text = Social.localUser.userName;
-
+/*
         //Note: add fail safe for the token passing
         if(UnityServices.State == ServicesInitializationState.Uninitialized)
             await UnityServices.InitializeAsync();
 
-        //await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+*/
         //Set text
         foodText.text = gameData.currencyData.food.ToString();
         ironText.text = gameData.currencyData.iron.ToString();

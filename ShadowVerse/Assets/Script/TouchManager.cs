@@ -17,6 +17,7 @@ public class TouchManager : MonoBehaviour
     private float zoomSpeed = 5f;
     [SerializeField]
     private float maxZoomIncrease = 0.1f;
+    public bool canMove = true;
 
     private Vector3 startPosition = Vector3.zero;
     private float targetZoom;
@@ -30,7 +31,7 @@ public class TouchManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && canMove)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -46,7 +47,7 @@ public class TouchManager : MonoBehaviour
 
                 if (touch.phase == UnityEngine.TouchPhase.Moved && secoundFinger.phase == UnityEngine.TouchPhase.Moved)
                 {
-                    Debug.Log("Distance: " + Vector2.Distance(touch.position, secoundFinger.position));
+                    //Debug.Log("Distance: " + Vector2.Distance(touch.position, secoundFinger.position));
 
                     if (Vector2.Distance(touch.position, secoundFinger.position) <= maxZoomIncrease)
                     {
@@ -75,23 +76,23 @@ public class TouchManager : MonoBehaviour
                     if (Vector2.Dot(Vector2.up, direction) > directionThreashold)
                     {
                         //Debug.Log("Swipe Up");
-                        Camera.main.transform.position += Vector3.up * Time.deltaTime * camSpeed;
+                        Camera.main.transform.position += camSpeed * Time.deltaTime * Vector3.up;
                     }
                     else if (Vector2.Dot(Vector2.down, direction) > directionThreashold)
                     {
                         //Debug.Log("Swipe Down");
-                        Camera.main.transform.position += Vector3.down * Time.deltaTime * camSpeed;
+                        Camera.main.transform.position += camSpeed * Time.deltaTime * Vector3.down;
                     }
 
                     if (Vector2.Dot(Vector2.left, direction) > directionThreashold)
                     {
                         //Debug.Log("Swipe Left");
-                        Camera.main.transform.position += Vector3.left * Time.deltaTime * camSpeed;
+                        Camera.main.transform.position += camSpeed * Time.deltaTime * Vector3.left;
                     }
                     else if (Vector2.Dot(Vector2.right, direction) > directionThreashold)
                     {
                         //Debug.Log("Swipe Right");
-                        Camera.main.transform.position += Vector3.right * Time.deltaTime * camSpeed;
+                        Camera.main.transform.position += camSpeed * Time.deltaTime * Vector3.right;
                     }
                 }
             }

@@ -15,7 +15,15 @@ MonoBehaviour:
   data: []
   canSaveLocal: 1
   canBuild: 0
-  townHall: {fileID: 11400000, guid: 3b700a6fd23f2364792ae422a4c28b69, type: 2}
+  currentBuilding: 1
+  townHall: {fileID: 11400000, guid: 25ef1ecfb5412564ea1c3ad9aa033b24, type: 2}
+  warriorHall: {fileID: 11400000, guid: f0c634a0a38d68544ac8b09a68c9c9cb, type: 2}
   buildingLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
+  constructionLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

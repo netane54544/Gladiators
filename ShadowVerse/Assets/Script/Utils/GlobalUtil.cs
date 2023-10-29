@@ -76,12 +76,12 @@ public class GlobalUtil : Singleton<GlobalUtil>
         gameData.currencyData.stone = data.stone;
         gameData.currencyData.gold = data.gold;
 
-        PlayerPrefs.SetInt("food", data.food);
-        PlayerPrefs.SetInt("wood", data.wood);
-        PlayerPrefs.SetInt("iron", data.iron);
-        PlayerPrefs.SetInt("stone", data.stone);
-        PlayerPrefs.SetInt("gold", data.gold);
-        PlayerPrefs.Save();
+        ZPlayerPrefs.SetInt("food", data.food);
+        ZPlayerPrefs.SetInt("wood", data.wood);
+        ZPlayerPrefs.SetInt("iron", data.iron);
+        ZPlayerPrefs.SetInt("stone", data.stone);
+        ZPlayerPrefs.SetInt("gold", data.gold);
+        ZPlayerPrefs.Save();
     }
 
     internal async IAsyncEnumerable<PlayerBalance> GetBalanceAsync()
@@ -95,6 +95,20 @@ public class GlobalUtil : Singleton<GlobalUtil>
             var balance = await currency.GetPlayerBalanceAsync();
             yield return balance;
         }
+    }
+
+    //Update this later for more items
+    internal async Task<List<PlayersInventoryItem>> GetItemsAsync()
+    {
+        GetInventoryOptions options = new()
+        {
+            ItemsPerFetch = 100
+        };
+
+        GetInventoryResult getInventoryResult = await EconomyService.Instance.PlayerInventory.GetInventoryAsync(options);
+        List<PlayersInventoryItem> items = getInventoryResult.PlayersInventoryItems;
+
+        return items;
     }
 
     internal IEnumerator LoadSceneAsync(int id)

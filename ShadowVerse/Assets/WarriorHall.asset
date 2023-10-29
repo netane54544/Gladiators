@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc791c4458eff54190e6b850d8ed40f, type: 3}
+  m_Name: WarriorHall
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2802708602307828476, guid: 9b893f2ec002168408763c65f818d161, type: 3}
+  constractionPrefab: {fileID: 2802708602307828476, guid: 96bc96b8f9fc93a4e8fb03e37e6d5a55, type: 3}

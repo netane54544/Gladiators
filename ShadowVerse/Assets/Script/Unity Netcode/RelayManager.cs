@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
@@ -33,11 +34,16 @@ public class RelayManager : MonoBehaviour
     private string playerID;
     private const int MAX_PLAYERS = 2;
     private const string JOINCODE_KEY = "jG";
+#pragma warning disable IDE0052 // Remove unread private members
     private Task search;
+#pragma warning restore IDE0052 // Remove unread private members
     private CancellationTokenSource cancellationToken;
     public GameObject roomSwitcherPrefab;
     public GameObject playerPrefab;
     public GameObject lobbyPanel;
+    public GameObject playBtn;
+    public TextMeshProUGUI text;
+    public bool won = false;
     private Texture2D player1Texture;
     private Texture2D player2Texture;
     private const int COOLDOWN = 30;
@@ -71,7 +77,7 @@ public class RelayManager : MonoBehaviour
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
 
-        UpdatePlayerOptions playerOptions = new UpdatePlayerOptions() { Data = new Dictionary<string, PlayerDataObject>() { { "url", new PlayerDataObject(visibility: PlayerDataObject.VisibilityOptions.Public, value: imageUrl) } } };
+        UpdatePlayerOptions playerOptions = new() { Data = new Dictionary<string, PlayerDataObject>() { { "url", new PlayerDataObject(visibility: PlayerDataObject.VisibilityOptions.Public, value: imageUrl) } } };
         connectedLobby = await LobbyService.Instance.UpdatePlayerAsync(connectedLobby.Id, playerID, playerOptions);
         
         try
@@ -135,7 +141,6 @@ public class RelayManager : MonoBehaviour
 
     private void Update()
     {
-
         if (NetworkManager.Singleton.ShutdownInProgress)
         {
             //Get back to the town
@@ -267,7 +272,7 @@ public class RelayManager : MonoBehaviour
                 cooldown = (newCooldown - cooldown > 1) ? cooldown + 1 : newCooldown - cooldown;
                 UnityToolbag.Dispatcher.Invoke(() =>
                 {
-                    Debug.Log(cooldown);
+                    text.text = (30 - cooldown).ToString();
                 });
             }
 
@@ -288,6 +293,11 @@ public class RelayManager : MonoBehaviour
         });
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        //Add later error message
+        Destroy(this.gameObject);
+    }
     private void OnDestroy()
     {
         try
@@ -310,6 +320,7 @@ public class RelayManager : MonoBehaviour
         }
 
         cancellationToken.Dispose();
+        playBtn.SetActive(true);
     }
 
 }
